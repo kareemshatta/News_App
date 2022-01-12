@@ -54,10 +54,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //di_dependencies
-    implementation "org.koin:koin-androidx-scope:2.0.1"
-    implementation "org.koin:koin-androidx-viewmodel:2.0.1"
-    implementation "org.koin:koin-androidx-ext:2.0.1"
+    implementation "org.koin:koin-androidx-scope:2.2.2"
+    implementation "org.koin:koin-androidx-viewmodel:2.2.2"
+    implementation "org.koin:koin-androidx-ext:2.2.2"
     implementation "androidx.multidex:multidex:2.0.1"
+
+    // Navigation Components
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
     //epoxy_dependencies
     def epoxyVersion = "4.4.1"
