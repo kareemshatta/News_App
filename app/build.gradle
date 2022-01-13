@@ -60,7 +60,7 @@ dependencies {
     implementation "org.koin:koin-androidx-ext:2.2.2"
     implementation "androidx.multidex:multidex:2.0.1"
 
-    // Navigation Components
+    // Navigation_Components_dependencies
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
@@ -75,5 +75,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
+    //pagination_library_dependency
+    implementation "com.github.markomilos:paginate:0.5.1"
 
 }
