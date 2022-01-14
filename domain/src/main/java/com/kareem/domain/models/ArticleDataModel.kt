@@ -9,6 +9,7 @@ data class ArticleDataModel(
     val description: String,
     val publishedAt: String,
     val title: String,
+    val sourceName: String,
     val url: String,
     val urlToImage: String
 ) : Serializable

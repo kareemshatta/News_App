@@ -23,5 +23,17 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:ignore="SpeakableTextPresentCheck"
             tools:listitem="@layout/view_holder_article_layout" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include
+        android:id="@+id/networErrorLayout"
+        layout="@layout/network_error_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/articlesSwipeToRefresh" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -78,4 +78,7 @@ dependencies {
     //pagination_library_dependency
     implementation "com.github.markomilos:paginate:0.5.1"
 
+    //image_loading_library_dependency
+    implementation("io.coil-kt:coil:1.4.0")
+
 }
