@@ -7,17 +7,15 @@ import com.kareem.domain.result.Resource
 import com.kareem.domain.useCases.GetNewsUseCase
 import com.kareem.news_app.utils.PageInfoModel
 import com.paginate.Paginate
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class NewsViewModel(
-    private val getNewsUseCase: GetNewsUseCase
+    private val getNewsUseCase: GetNewsUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel(), Paginate.Callbacks {
 
-    private val job = Job()
+    val job = Job()
     private var _pageInfo = PageInfoModel.init()
     val pageInfo get() = _pageInfo
     val newsStateFlow =
@@ -34,7 +32,7 @@ class NewsViewModel(
         _pageInfo = PageInfoModel.init()
     }
 
-    private suspend fun onLoadNews(result: Resource<MutableList<ArticleDataModel>?>) {
+    suspend fun onLoadNews(result: Resource<MutableList<ArticleDataModel>?>) {
         newsStateFlow.emit(result)
         if (result is Resource.Success) {
             _pageInfo.pageNumber = _pageInfo.pageNumber.plus(1)
@@ -45,7 +43,7 @@ class NewsViewModel(
     }
 
     override fun onLoadMore() {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher + job) {
             this@NewsViewModel.newsStateFlow.emit(Resource.Loading())
             val response = getLatestNews()
             onLoadNews(response)
@@ -60,7 +58,7 @@ class NewsViewModel(
         clearReferences()
     }
 
-    private fun clearReferences() {
+    fun clearReferences() {
         resetPagination()
         job.cancel()
     }
