@@ -22,5 +22,36 @@
         android:id="@+id/articleDetailsFragment"
         android:name="com.kareem.news_app.ui.article_details.ArticleDetailsFragment"
         android:label="fragment_article_details"
-        tools:layout="@layout/fragment_article_details" />
+        tools:layout="@layout/fragment_article_details" >
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="urlOfImage"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="publishedAt"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="author"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="content"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

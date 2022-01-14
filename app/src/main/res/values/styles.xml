@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextViewStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="TextViewMediumSizeStyle" parent="TextViewStyle">
+        <item name="android:textSize">@dimen/textMedium</item>
+    </style>
+
+    <style name="TextViewLargeSizeStyle" parent="TextViewStyle">
+        <item name="android:textSize">@dimen/textLarge</item>
+    </style>
+
+    <style name="TextViewXLargeSizeStyle" parent="TextViewStyle">
+        <item name="android:textSize">@dimen/textXLarge</item>
+    </style>
+</resources>

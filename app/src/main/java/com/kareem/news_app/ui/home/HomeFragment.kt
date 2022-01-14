@@ -24,8 +24,9 @@ import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshListener {
     private val viewModel by viewModel<NewsViewModel>()
-    private lateinit var binding: HomeFragmentBinding
-    private val job = Job()
+    private var _binding: HomeFragmentBinding? = null
+    private val binding get() = _binding!!
+    private var job = Job()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
     private val fragmentTag = "HomeFragment"
     private var newsList: MutableList<ArticleDataModel> = mutableListOf()
@@ -34,7 +35,7 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = HomeFragmentBinding.inflate(inflater, container, false)
+        _binding = HomeFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,6 +48,10 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
         loadNewsWithPagination()
     }
 
+    override fun onResume() {
+        super.onResume()
+        job = Job()
+    }
     private fun setupSwipeToRefresh() {
         binding.articlesSwipeToRefresh.apply {
             setOnRefreshListener(this@HomeFragment)
@@ -113,6 +118,7 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
         job.cancel()
     }
 
