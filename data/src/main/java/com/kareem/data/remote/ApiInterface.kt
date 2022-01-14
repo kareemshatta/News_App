@@ -7,10 +7,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiInterface {
-    @GET("v2/top-headlines")
+    @GET("v2/everything")
     suspend fun getLatestNews(
-        @Query("country")
-        countryCode: String = "us",
+        @Query("q")
+        company: String = "apple",
+        @Query("sortBy")
+        sortedBy: String = "popularity",
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")

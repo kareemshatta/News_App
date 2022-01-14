@@ -28,6 +28,7 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
     private val job = Job()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
     private val fragmentTag = "HomeFragment"
+    private var newsList: MutableList<ArticleDataModel> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +41,7 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        buildRecyclerViewItems(mutableListOf())
+        buildRecyclerViewItems(newsList)
         setupSwipeToRefresh()
         handleRequestStates()
         loadNewsWithPagination()
@@ -55,7 +56,7 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
 
     private fun loadNewsWithPagination() {
         Paginate.with(binding.articlesRecyclerView, viewModel)
-            .setLoadingTriggerThreshold(2)
+            .setLoadingTriggerThreshold(4)
             .addLoadingListItem(false)
             .build()
     }
@@ -79,7 +80,8 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
                     }
                     is Resource.Success -> {
                         result.data?.let {
-                            buildRecyclerViewItems(it)
+                            newsList.addAll(it)
+                            buildRecyclerViewItems(newsList)
                         }
                         viewModel.newsStateFlow.emit(Resource.Idle())
                     }
@@ -103,6 +105,8 @@ class HomeFragment : Fragment(), CoroutineScope, SwipeRefreshLayout.OnRefreshLis
         if (binding.networErrorLayout.root.isVisible) {
             binding.networErrorLayout.root.visibility = View.GONE
         }
+        newsList = mutableListOf()
+        buildRecyclerViewItems(newsList)
         viewModel.resetPagination()
         loadNewsWithPagination()
     }

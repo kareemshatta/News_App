@@ -18,12 +18,12 @@ data class Article(
     override fun map(from: Article): ArticleDataModel = ArticleDataModel(
         id = UUID.randomUUID().toString(),
         author = author.toString(),
-        content = content.toString(),
-        description = description.toString(),
-        publishedAt = publishedAt.toString(),
-        title = title.toString(),
-        sourceName = source?.name.toString(),
-        url = url.toString(),
-        urlToImage = urlToImage.toString()
+        content = content,
+        description = description,
+        publishedAt = publishedAt,
+        title = title,
+        sourceName = source?.name,
+        url = url,
+        urlToImage = urlToImage
     )
 }
